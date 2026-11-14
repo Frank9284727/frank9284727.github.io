@@ -58,6 +58,36 @@
             }
         }
     </script>
+    <style>
+        /* FrankOver logo animations */
+        @keyframes fo-float {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-10px); }
+        }
+        @keyframes fo-glow {
+            0%, 100% { filter: drop-shadow(0 0 6px rgba(190, 242, 30, .35)); }
+            50%      { filter: drop-shadow(0 0 22px rgba(190, 242, 30, .75)); }
+        }
+        @keyframes fo-beat {
+            0%, 100% { transform: scale(1); }
+            25%      { transform: scale(1.12); }
+            40%      { transform: scale(0.98); }
+            60%      { transform: scale(1.08); }
+        }
+        #ps-logo {
+            animation: fo-float 4s ease-in-out infinite, fo-glow 2.6s ease-in-out infinite;
+            will-change: transform, filter;
+        }
+        #ps-logo-container:hover #ps-logo {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 26px rgba(190, 242, 30, .9));
+        }
+        #ps-logo-container:active #ps-logo { transform: scale(0.94); }
+        /* While auto-jailbreak runs, body gets .jb-running (set by JS if present) */
+        .jb-running #ps-logo {
+            animation: fo-beat 1s ease-in-out infinite, fo-glow 1s ease-in-out infinite;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-900 text-white">
@@ -111,14 +141,8 @@
             <button id="pslogo">
                 <div id="ps-logo-container"
                     class="relative group cursor-pointer flex flex-col items-center justify-center p-8 rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300 transform hover:scale-102">
-                    <svg id="ps-logo" class="w-32 h-32 transition-all duration-500 ease-in-out" viewBox="0 0 32 32"
-                        fill="#3B82F6" xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M0.69116 21.9548C-0.506476 22.7935 -0.284724 24.2384 2.44769 25.1419C5.18011 26.0455 8.35603 26.2323 11.1505 25.729C11.0707 25.729 11.3102 25.729 11.1505 25.729V22.8774L8.43588 23.8C7.39792 24.1355 6.35997 24.2194 5.32202 23.9677C4.5236 23.7161 4.68328 23.2129 5.64139 22.7935L11.1505 20.7806V17.6774L3.48565 20.4452C2.52754 20.7806 1.56943 21.2839 0.69116 21.9548ZM19.2146 9.37419V17.5097C22.4881 19.1871 25.0431 17.5097 25.0431 13.1484C25.0431 8.70323 23.5261 6.69032 19.1348 5.09677C16.8193 4.25806 14.4241 3.50323 12.0288 3V27.2387L17.6178 29V8.61935C17.6178 7.69677 17.6178 7.02581 18.2565 7.27742C19.1348 7.52903 19.2146 8.45161 19.2146 9.37419ZM29.5941 20.0258C27.2787 19.1871 24.8036 18.8516 22.4083 19.1032C21.0779 19.1906 19.8294 19.5869 18.5759 20.0258V23.2968L23.7656 21.2839C24.8036 20.9484 25.8415 20.8645 26.8795 21.1161C27.6779 21.3677 27.5182 21.871 26.5601 22.2903L18.5759 25.3935V28.5806L29.5941 24.3032C30.3925 23.9677 31.1111 23.5484 31.7499 22.8774C32.3088 22.0387 32.0692 20.8645 29.5941 20.0258Z">
-                            </path>
-                        </g>
-                    </svg>
+                    <img id="ps-logo" src="./includes/assets/icons/logo.png" alt="FrankOver"
+                        class="w-40 h-40 object-contain transition-all duration-500 ease-in-out" />
                 </div>
             </button>
             <h3 class="text-white/70 text-lg mt-4" id="click-to-start-text"></h3>
@@ -131,7 +155,7 @@
             <!-- Compatibility message -->
             <p id="PS4FW" class="text-white/70 text-lg mt-4 mb-6">-</p>
             <a class="hidden secondHostBtn bg-blue-600 hover:bg-blue-700 p-3 rounded font-semibold disabled:opacity-50 transition-colors text-white text-center"
-                href="http://webkitty.arabpixel.net/" style="text-decoration: none;">
+                href="https://frank9284727.github.io/" style="text-decoration: none;">
                 <button
                     class="bg-blue-600 hover:bg-blue-700 p-3 rounded font-semibold disabled:opacity-50 transition-colors text-white text-center">Load
                     payloads using a PayLoader - External link</button>
@@ -409,7 +433,7 @@
                     </div>
                     <a hidden
                         class="secondHostBtn w-full bg-blue-600 hover:bg-blue-700 p-3 rounded font-semibold disabled:opacity-50 transition-colors text-white text-center"
-                        href="http://webkitty.arabpixel.net/" style="text-decoration: none;">
+                        href="https://frank9284727.github.io/" style="text-decoration: none;">
                         <button
                             class="w-full bg-blue-600 hover:bg-blue-700 p-3 rounded font-semibold disabled:opacity-50 transition-colors text-white text-center">Load
                             payloads using a payload loader - External link</button>
