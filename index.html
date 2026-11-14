@@ -49,8 +49,13 @@
         var isThisPS4 = navigator.userAgent.indexOf("PlayStation 4") !== -1;
         var isLocalServer =  /^(127\.|192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[0-1])\.)/.test(window.location.hostname);
         var isCurrentHTTPS = window.location.protocol === 'https:';
-        if (isThisPS4 && goToHttps && !isLocalServer && isCurrentHTTPS){
+        // github.io (and other hosts) force HTTPS: redirecting to http would just bounce
+        // back to https and re-prompt forever, so never offer the switch there.
+        var forcesHttps = /\.github\.io$/i.test(window.location.hostname);
+        if (isThisPS4 && goToHttps && !isLocalServer && isCurrentHTTPS && !forcesHttps){
             if (confirm("You are currently using HTTPS, which prevents loading payloads through a bin/elf loader servers, switch to http instead? (recommended)")){
+                // Set the flag BEFORE leaving so a redirect bounce can't loop the prompt.
+                localStorage.setItem("dontHTTPS", "1");
                 window.abortLoading = true;
                 window.location.href = window.location.href.replace(/^https:/, "http:");
             } else{
